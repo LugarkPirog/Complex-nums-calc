@@ -49,6 +49,7 @@ public:
 int mandel(Complex);
 
 int main() {
+	setlocale(0, "");
 	double a, b;
 	Complex z;
 	Complex x(-0.2);
