@@ -2,21 +2,14 @@
 //
 
 #include "stdafx.h"
-#include <iostream>
-#include <conio.h>
+
 
 using namespace std;
 class Complex {
 	double re, im;
 public:
-	Complex(double z_re, double z_im) {
+	Complex(double z_re = 0, double z_im = 0) {
 		re = z_re; im = z_im;
-	};
-	Complex() {
-		re = 0; im = 0;
-	};
-	Complex(double z) {
-		re = z; im = 0;
 	};
 	double modul() {
 		return(sqrt(re*re + im*im));
@@ -41,43 +34,33 @@ public:
 	};
 	Complex operator/(Complex a) {
 		double div = a.re*a.re + a.im*a.im;
-		Complex res((re*a.re+im*a.im)/div, (a.re*im-a.im*re)/div);
+		Complex res((re*a.re + im*a.im) / div, (a.re*im - a.im*re) / div);
 		return (res);
 	};
+	Complex operator+=(Complex a) {
+		return Complex(re + a.re, im + a.im);
+	};
 };
-
-int mandel(Complex);
+int mandel(Complex, int &);
 
 int main() {
 	setlocale(0, "");
-	double a, b;
-	Complex z;
-	Complex x(-0.2);
-	/*cout << "Vvedite Re, a potom Im: ";
-	cin >> a >> b;
-	z.set(a, b);
-	cout << "\n\nVvedite for 2 comp num Re, a potom Im: ";
-	cin >> a >> b;
-	x.set(a, b);
-	cout << "The 1st nums' module is " << z.modul() << endl;
-	cout << "And the 2nd module is " << x.modul() << "\n\n";
-	cout << "Summ is: "; (z + x).print();
-	cout << "Subtr is: "; (z - x).print();
-	cout << "Mult is: "; (z * x).print();
-	cout << "And div is: "; (z / x).print();
-	*/
 	//TASK 1 ~~~ Mandelbrot set ~~~
-	
-	cout << mandel(z) << endl;
+	double a, b;
+	int accuracy;
+	Complex z;
+	cout << "Davai K, a potom chisla: ";
+	cin >> accuracy >> a >> b;
+	z.set(a, b);
+	cout << endl << setw(10) << right << mandel(z, accuracy) << endl;
 	
 	system("pause");
 	return 0;
 }
 
-int mandel(Complex a) {
-	int K = 10000;
+int mandel(Complex a, int &accuracy) {
 	Complex tmp = a;
-	for (int i=0; K-i; i++) {
+	for (int i=1; accuracy-i; i++) {
 		if (tmp.modul() < 2) {
 			tmp = tmp + a;
 		}
