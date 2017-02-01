@@ -10,7 +10,7 @@
 #include <iostream>
 #include <conio.h>
 #include <iomanip>
-
-
+#include <fstream>
+#include <fcntl.h>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

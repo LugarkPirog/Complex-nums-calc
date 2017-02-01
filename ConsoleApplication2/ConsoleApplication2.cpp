@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 
-
 using namespace std;
 class Complex {
 	double re, im;
@@ -46,14 +45,21 @@ int mandel(Complex, int &);
 int main() {
 	setlocale(0, "");
 	//TASK 1 ~~~ Mandelbrot set ~~~
-	double a, b;
-	int accuracy;
-	Complex z;
-	cout << "Davai K, a potom chisla: ";
-	cin >> accuracy >> a >> b;
-	z.set(a, b);
-	cout << endl << setw(10) << right << mandel(z, accuracy) << endl;
-	
+	ifstream a;
+	int q;
+	a.open("test.txt", O_RDONLY);
+	if (!a) {
+		cout << "Chto-to poshlo ne tak...\n";
+	}
+	else {
+		a >> q;
+		while (!a.eof()) {
+			double re, im;
+			Complex z;
+			a >> re >> im;
+			cout << setw(6) << right << re << setw(8) << right << im << "i" << setw(5) << right << mandel(Complex(re, im), q) << endl;
+		};
+	};
 	system("pause");
 	return 0;
 }
